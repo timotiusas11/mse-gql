@@ -1,0 +1,60 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Recipe {
+  id: Int!
+  name: String!
+  ingredients: [String!]!
+  isHalal: Boolean!
+  isVegetarian: Boolean!
+  description: String!
+  rating: Float!
+}
+
+type InsertResult {
+  result: String!
+  data: Recipe!
+}
+
+type UpdateDeleteResult {
+  result: String!
+}
+
+input SearchParam {
+  keyword: String!
+  isHalal: Boolean!
+  isVegetarian: Boolean!
+  page: Int!
+  take: Int!
+}
+
+type Query {
+  recipe(input: Int!): Recipe!
+  search(input: SearchParam!): [Recipe!]!
+}
+
+input NewRecipe {
+  name: String!
+  ingredients: [String!]!
+  isHalal: Boolean!
+  isVegetarian: Boolean!
+  description: String!
+  rating: Float!
+}
+
+input UpdateRecipe {
+  id: Int!
+  name: String!
+  ingredients: [String!]!
+  isHalal: Boolean!
+  isVegetarian: Boolean!
+  description: String!
+  rating: Float!
+}
+
+type Mutation {
+  createRecipe(input: NewRecipe!): InsertResult!
+  updateRecipe(input: UpdateRecipe!): UpdateDeleteResult!
+  deleteRecipe(input: Int!): UpdateDeleteResult!
+}
